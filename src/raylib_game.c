@@ -31,8 +31,8 @@ Sound fxCoin = { 0 };
 //----------------------------------------------------------------------------------
 // Local Variables Definition (local to this module)
 //----------------------------------------------------------------------------------
-static const int screenWidth = 1200;
-static const int screenHeight = 600;
+static const int screenWidth = 1100;
+static const int screenHeight = 540;
 
 // Required variables to manage screen transitions (fade-in, fade-out)
 static float transAlpha = 0.0f;
@@ -59,14 +59,17 @@ int main(void)
 {
     // Initialization
     //---------------------------------------------------------
+    //SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE);
     InitWindow(screenWidth, screenHeight, "Cross The Road");
-
+    SetWindowState(FLAG_WINDOW_RESIZABLE);
+    RenderTexture2D target = LoadRenderTexture(screenWidth, screenHeight);
+    SetTextureFilter(target.texture, TEXTURE_FILTER_BILINEAR);
     InitAudioDevice();      // Initialize audio device
 
     // Load global data (assets that must be available in all screens, i.e. font)
-    font = LoadFont("resources/mecha.png");
+    font = LoadFont("res/mecha.png");
     //music = LoadMusicStream("resources/ambient.ogg"); // TODO: Load music
-    fxCoin = LoadSound("resources/coin.wav");
+    fxCoin = LoadSound("res/coin.wav");
 
     SetMusicVolume(music, 1.0f);
     PlayMusicStream(music);
@@ -102,6 +105,7 @@ int main(void)
     }
 
     // Unload global data loaded
+    UnloadRenderTexture(target);
     UnloadFont(font);
     UnloadMusicStream(music);
     UnloadSound(fxCoin);
