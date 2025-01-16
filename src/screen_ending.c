@@ -25,6 +25,8 @@
 
 #include "raylib.h"
 #include "screens.h"
+#include "function.h"
+#include "raygui.h"
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
@@ -55,9 +57,21 @@ void UpdateEndingScreen(void)
     //     finishScreen = 1;
     //     PlaySound(fxCoin);
     // }
-    if (IsKeyPressed(KEY_F11))
+    if(Score <0){
+        Score = 0;
+    }
+    DrawText(TextFormat("Game Over: %d", Score),GetScreenWidth()/2-(14/2*40)+100,100,40,RED);
+    if (GuiButton((Rectangle){GetScreenWidth()/2-50, GetScreenHeight()/2-80,120,40}, "Main Menu"))
     {
-        ToggleFullscreen();
+        // Button was clicked
+        finishScreen = 1; // GAMEPLAY
+        PlaySound(fxCoin);
+    }
+    if (GuiButton((Rectangle){GetScreenWidth()/2-50, GetScreenHeight()/2-80+60,120,40}, "Exit"))
+    {
+        // Button was clicked
+        CloseWindow();
+        PlaySound(fxCoin);
     }
 }
 

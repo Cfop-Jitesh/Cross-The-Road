@@ -25,6 +25,9 @@
 
 #include "raylib.h"
 #include "screens.h"
+#define RAYGUI_IMPLEMENTATION
+#include "raygui.h"
+#include "function.h"
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
@@ -47,14 +50,6 @@ void InitTitleScreen(void)
 void UpdateTitleScreen(void)
 {
     // TODO: Update TITLE screen variables here!
-
-    // Press enter or tap to change to GAMEPLAY screen
-    if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
-    {
-        // finishScreen = 1;   // OPTIONS
-        finishScreen = 2; // GAMEPLAY
-        PlaySound(fxCoin);
-    }
     if (IsKeyPressed(KEY_F11))
     {
         ToggleFullscreen();
@@ -64,7 +59,20 @@ void UpdateTitleScreen(void)
 // Title Screen Draw logic
 void DrawTitleScreen(void)
 {
-    ;
+    DrawText("Cross The Road",GetScreenWidth()/2-(14/2*40)+100,100,40,RED);
+    if (GuiButton((Rectangle){GetScreenWidth()/2-50, GetScreenHeight()/2-80,120,40}, "Start"))
+    {
+        // Button was clicked
+        finishScreen = 2; // GAMEPLAY
+        Score = 0;
+        PlaySound(fxCoin);
+    }
+    if (GuiButton((Rectangle){GetScreenWidth()/2-50, GetScreenHeight()/2-80+60,120,40}, "Exit"))
+    {
+        // Button was clicked
+        CloseWindow();
+        PlaySound(fxCoin);
+    }
 }
 
 // Title Screen Unload logic
