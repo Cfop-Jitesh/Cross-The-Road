@@ -1,10 +1,10 @@
-$(Cross The Road)
+Cross The Road
 
 ![$(Game Title)](screenshots/screenshot000.png "$(Game Title)")
 
 ### Description
 
-$(Your Game Description)
+This game was made by me when I was in 8th grade (approximately 2 years ago), I do not know why I had not made a description for it yet.
 
 ### Features
 
